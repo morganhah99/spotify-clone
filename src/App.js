@@ -3,15 +3,19 @@ import './App.css';
 import Login from './Login';
 import { getTokenFromUrl } from './spotify';
 import SpotifyWebApi from "spotify-web-api-js";
+import Player from './Player';
+import { useDataLayerValue } from './DataLayer';
 
-const spotify = new SpotifyWebApi(); //Responsible for any interaactions between react app and spotify
+
+const spotify = new SpotifyWebApi(); //Responsible for any interaactions between react app and spotify allows us to connect the react app to spotify
 
 function App() {
 
-  const [token, setToken] = useState(null);
+  const [{ user, token }, dispatch] = useDataLayerValue();
   
   // Runs code based on a given condition, usually a function. if you want it to run once, you add [] ex: }, []);
   useEffect(() => {
+
     const hash = getTokenFromUrl(); //takes accesstoken of user into a hash variable after user authenticates itself using spotify api
 
     window.location.hash = ""; 
@@ -19,12 +23,19 @@ function App() {
     const _token = hash.access_token;
 
     if (_token) {
-      setToken(_token); //token is stored here in as a state
+      dispatch({   
+        type: 'SET_TOKEN',
+        token: _token,
+      })
 
-      spotify.setAccessToken(_token); //access token is given to this method to communicate between the app and spotify (connects spotify to react)
+      spotify.setAccessToken(_token); // access token is given to this method to communicate between the app and spotify (connects spotify to react)
 
-      spotify.getMe().then(user => { //pulls user information from spotify api (username, how many followers, uri, etc)
-        console.log(user);
+      spotify.getMe().then(user => { // pulls current user information from spotify api (username, how many followers, uri, etc)
+
+        dispatch({   //dispatch will pop in the user right into the data layer afterwards pull the data layer and reading it 
+          type: 'SET_USER',
+          user: user,
+        })
       });
 
     }
@@ -32,11 +43,14 @@ function App() {
     console.log('I have a token ' , token);
   }, []);
 
+  console.log(user);   //reads data layer
+  console.log(token);
+
   return (
     <div className="app">
       {
-        token ? (                  // if there is a token present then the first block of code will be executed, otherwise render the login component
-          <h1>I am logged in</h1>
+        token ? (     // if there is a token render player, otherwise render the login component
+          <Player />
         ) : (
           <Login />
         )
