@@ -4,9 +4,14 @@
     height: 40px;
     cursor: pointer;
     transition: 150ms color ease-in;
+    align-items: center;
 }
 
 .sidebarOption:hover {
     color:white;
 }
 
+.sidebarOption__icon{
+    padding-left: 10px;
+    padding-right: 10px;
+}

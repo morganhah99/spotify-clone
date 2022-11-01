@@ -42,8 +42,6 @@ function App() {
 
   }, []);
 
-  console.log(user);   //reads data layer
-  console.log(token);
 
   return (
     <div className="app">
