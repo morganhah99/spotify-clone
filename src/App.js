@@ -40,7 +40,6 @@ function App() {
 
     }
 
-    console.log('I have a token ' , token);
   }, []);
 
   console.log(user);   //reads data layer
