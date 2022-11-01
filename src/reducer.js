@@ -14,11 +14,11 @@ const reducer = (state, action)  => {  //state is how the website currently look
             ...state, 
             user: action.user
         }
-        case 'SET_TOKEN':
-            return {
-                ...state, 
-                token: action.token
-            }
+    case 'SET_TOKEN':
+        return {
+            ...state, 
+            token: action.token
+        }
     default:
         return state;
    }
