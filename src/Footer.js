@@ -13,7 +13,7 @@ function Footer() {
   return (
     <div className='footer'>
         <div className="footer__left">
-          <p>Album and song details</p>
+          <img src="" alt="" />
         </div>
 
         <div className='footer__center'>
