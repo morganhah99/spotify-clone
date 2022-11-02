@@ -22,6 +22,8 @@ function App() {
 
     const _token = hash.access_token;
 
+    document.title = 'Spotify';
+
     if (_token) {
       dispatch({   
         type: 'SET_TOKEN',
