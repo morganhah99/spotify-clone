@@ -5,7 +5,7 @@ import { useDataLayerValue } from './DataLayer'
 import Header from "./Header"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
+import SongRow from "./SongRow"
 
 function Body({ spotify }) {
 
@@ -33,7 +33,9 @@ function Body({ spotify }) {
             <FavoriteIcon fontSize='large'/>
             <MoreHorizIcon />
           </div>
-
+          {discover_weekly?.tracks.items.map(item => 
+            <SongRow track={item.track} />
+            )}
         </div>
     </div>
   )
