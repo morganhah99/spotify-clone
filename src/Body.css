@@ -20,6 +20,7 @@
 
 .body__infoText {
     flex: 1;
+    padding: 20px;
 }
 
 .body__infoText > h2 {
